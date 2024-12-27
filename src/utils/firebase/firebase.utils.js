@@ -4,6 +4,7 @@ import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   getAuth,
+  signInWithEmailAndPassword,
   signInWithPopup,
   signInWithRedirect,
 } from "firebase/auth";
@@ -73,6 +74,27 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
       alert("Email already in use");
       return;
     }
-    console.error("Error signing in with user and email", error.message);
+    console.error(
+      "Error signing up with user email and password",
+      error.message
+    );
+  }
+};
+
+export const signInAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+
+  try {
+    const response = await signInWithEmailAndPassword(auth, email, password);
+    return response;
+  } catch (error) {
+    if (error.code === "auth/invalid-credential") {
+      alert("Invalid credentials");
+      return;
+    }
+    console.error(
+      "Error signing in with user email and password",
+      error.message
+    );
   }
 };

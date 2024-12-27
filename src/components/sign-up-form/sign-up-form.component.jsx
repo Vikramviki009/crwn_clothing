@@ -83,7 +83,7 @@ function SignUpForm() {
           onChange={handleChange}
           required
         />
-        <Button type="submit">SignUp</Button>
+        <Button type="submit">Sign Up</Button>
       </form>
     </div>
   );
