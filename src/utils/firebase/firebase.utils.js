@@ -4,9 +4,10 @@ import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   getAuth,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
-  signInWithRedirect,
+  signOut,
 } from "firebase/auth";
 import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
 
@@ -55,7 +56,6 @@ export const createUserDocumentFromAuth = async (userAuth) => {
       console.error("Error creating user: ", error);
     }
   }
-  console.log(userDocRef, "userDocRef");
   return userDocRef;
 };
 
@@ -97,4 +97,17 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
       error.message
     );
   }
+};
+
+export const signOutUser = () => {
+  try {
+    const response = signOut(auth);
+    return response;
+  } catch (error) {
+    console.error("Error signing out user.", error.message);
+  }
+};
+
+export const onAuthStateChangedListener = (callback) => {
+  onAuthStateChanged(auth, callback);
 };
