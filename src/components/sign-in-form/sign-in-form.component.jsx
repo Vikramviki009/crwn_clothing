@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from "react";
 import {
-  createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword,
   signInWithGooglePopup,
 } from "../../utils/firebase/firebase.utils";
@@ -32,7 +31,7 @@ function SignInForm() {
 
     const result = await signInAuthUserWithEmailAndPassword(email, password);
     if (result) {
-      // console.log(result);
+      console.log(result);
       // setCurrentUser(result?.user);
       // createUserDocumentFromAuth({ ...result.user });
       resetFormFields();
