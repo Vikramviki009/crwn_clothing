@@ -43,10 +43,14 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [cartCount, setCartCount] = useState(0);
 
+  // Calculate and update the total count of items in cart
+  // Uses reduce to sum up quantities of all items
   useEffect(() => {
     setCartCount(cartItems.reduce((acc, item) => acc + item.quantity, 0));
   }, [cartItems]);
 
+  // Memoized function to add items to cart
+  // Takes a product object as parameter and updates cart state
   const addItemToCart = useCallback(
     (productToAdd) => {
       setCartItems(addCartItem(cartItems, productToAdd));
@@ -54,6 +58,8 @@ export const CartProvider = ({ children }) => {
     [cartItems]
   );
 
+  // Memoized function to remove one quantity of an item from cart
+  // Takes a product object as parameter and updates cart state
   const removeItemFromCart = useCallback(
     (productToRemove) => {
       setCartItems(removeCartItem(cartItems, productToRemove));
@@ -61,6 +67,8 @@ export const CartProvider = ({ children }) => {
     [cartItems]
   );
 
+  // Memoized function to completely remove an item from cart
+  // Takes a product object and filters it out based on id
   const clearItemFromCart = useCallback(
     (productToClear) => {
       setCartItems(cartItems.filter((item) => item.id !== productToClear.id));

@@ -14,9 +14,8 @@ function Navigation() {
 
   const signOutHandler = useCallback(async () => {
     await signOutUser();
-
-    // setCurrentUser(null);
   }, []);
+
   return (
     <>
       <div className="navigation">
